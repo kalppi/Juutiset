@@ -50,7 +50,7 @@ public class NewsController {
         return "list";
     }
     
-    @GetMapping("/alue/{id}")
+    @GetMapping("/uutiset/alue/{id}")
     public String category(Model model, @PathVariable long id) {
         Optional<Category> cat = this.categoryRepository.findById(id);
         
