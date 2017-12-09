@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -cp target/classes:target/dependency/* wad.AliveApplication
+web: java $JAVA_OPTS -Dserver.port=$PORT -Dprofile=prod -cp target/classes:target/dependency/* com.jarnoluu.JuutisetApplication
