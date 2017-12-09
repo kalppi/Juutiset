@@ -36,7 +36,7 @@ public class PictureService {
         byte[] bytes = baos.toByteArray();
         baos.close();
         
-        Picture picture = new Picture("small_" + pic.getName(), "image/jpeg", bytes.length, bytes);
+        Picture picture = new Picture(pic.getName(), "image/jpeg", bytes.length, bytes);
         
         this.pictureRepository.save(picture);
         
