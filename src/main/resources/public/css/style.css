@@ -14,6 +14,9 @@ article {
     float: left;
 }
 
+article h3 {
+    font-size: 18pt;
+}
 
 
 #right ul {
