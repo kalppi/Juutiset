@@ -3,7 +3,7 @@
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     display: inline-block;
     padding: 3px 10px;
     background: #555;
@@ -14,6 +14,8 @@ article {
     float: left;
 }
 
+
+
 #right ul {
     list-style-type: none;
     padding: 0;
@@ -21,6 +23,10 @@ article {
 
 #right ul li {
     padding: 0 0 0 20px;
+}
+
+article {
+    margin-bottom: 30px;
 }
 
 article img {
@@ -34,6 +40,7 @@ article ul.categories {
     list-style-type: none;
     padding: 0;
     display: inline-block;
+    margin: 0;
 }
 
 article ul.categories li {

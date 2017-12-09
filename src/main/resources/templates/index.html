@@ -5,16 +5,18 @@
         <div layout:fragment="content">
             <article th:each="article : ${articles}">
                 <header>
+                    <div>
+                        <span class="published" th:text="${#temporals.format(article.published, 'd.M. yyyy HH:mm')}"></span>
+                        <span>Alueet: </span>
+                        <ul class="categories">
+                            <li th:each="cat : ${article.categories}">
+                                <a th:href="@{/alue/{id}(id=${cat.id})}" th:text="${cat.name}"></a>
+                            </li>
+                        </ul>
+                    </div>
                     <h3>
                         <a th:href="@{/uutinen/{id}(id=${article.id})}" th:text="${article.title}"></a>
                     </h3>
-                    <span class="published" th:text="${#temporals.format(article.published, 'd.M. yyyy HH:mm')}"></span>
-                    <span>Alueet: </span>
-                    <ul class="categories">
-                        <li th:each="cat : ${article.categories}">
-                            <a th:href="@{/alue/{id}(id=${cat.id})}" th:text="${cat.name}"></a>
-                        </li>
-                    </ul>
                 </header>
                 <section class="lead">
                     <img th:src="@{/picture/{id}(id=${article.thumb.id})}" />
