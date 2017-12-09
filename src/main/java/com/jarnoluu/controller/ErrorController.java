@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ErrorController {
     @GetMapping("*")
     public String notFound() {
+        return "redirect:/error";
+    }
+    
+    public String error() {
         return "error";
     }
 }

@@ -4,11 +4,13 @@ import com.jarnoluu.domain.Category;
 import com.jarnoluu.repository.CategoryRepository;
 import com.jarnoluu.service.NewsService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class NewsController {
@@ -45,6 +47,23 @@ public class NewsController {
         model.addAttribute("categories", this.categories());
         model.addAttribute("articles", this.newsService.getLatest());
         model.addAttribute("title", "Suosituimmat");
+        
+        return "list";
+    }
+    
+    @GetMapping("/alue/{id}")
+    public String category(Model model, @PathVariable long id) {
+        Optional<Category> cat = this.categoryRepository.findById(id);
+        
+        if(!cat.isPresent()) {
+            return "redirect:/error";
+        }
+        
+        Category category = cat.get();
+        
+        model.addAttribute("categories", this.categories());
+        model.addAttribute("articles", category.getArticles());
+        model.addAttribute("title", "Alue: " + category.getName());
         
         return "list";
     }
