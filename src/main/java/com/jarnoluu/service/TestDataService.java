@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class TestDataService {
     @Autowired
     private CategoryRepository categoryRepository;
     
-    private void create(String title, String lead, String content, String picture, int[] categories) throws IOException {
+    private void create(String title, String lead, String content, String picture, int[] categories, LocalDateTime time) throws IOException {
         Path path = Paths.get("pics/" + picture);
         byte[] data = Files.readAllBytes(path);
         
@@ -43,7 +43,7 @@ public class TestDataService {
         
         Article article = newsService.publishArticle(title, lead, content, pic, cats);
         
-        article.setPublished(LocalDateTime.of(2017, 10, 1, 12, 0, 0));
+        article.setPublished(time);
         
         this.articleRepository.save(article);
     }
@@ -78,8 +78,14 @@ public class TestDataService {
             new int[] {2}
         );
         
+        LocalDateTime time = LocalDateTime.now();
+        
+        Random rnd = new Random();
+        
         for(int i = 0; i < titles.size(); i++) {
-            this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i));
+            time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 3), ChronoUnit.SECONDS));
+            
+            this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i), time);
         }
     }
 }
