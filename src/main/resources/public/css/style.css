@@ -1,0 +1,15 @@
+article {
+    margin: 20px 0;
+}
+
+article img {
+    margin-bottom: 20px;
+}
+article .lead {
+    
+}
+
+article .lead img {
+    float: left;
+    margin-right: 10px;
+}
