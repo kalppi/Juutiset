@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -20,13 +21,13 @@ public class NewsController {
     @Autowired
     private CategoryRepository categoryRepository;
     
+    @ModelAttribute("categories")
     private List<Category> categories() {
         return this.categoryRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
     
     @GetMapping("/uutiset")
     public String index(Model model) {
-        model.addAttribute("categories", this.categories());
         model.addAttribute("articles", this.newsService.getLatest());
         model.addAttribute("title", "Etusivu");
         
@@ -35,7 +36,6 @@ public class NewsController {
     
     @GetMapping("/uutiset/uusimmat")
     public String latest(Model model) {
-        model.addAttribute("categories", this.categories());
         model.addAttribute("articles", this.newsService.getLatest());
         model.addAttribute("title", "Uusimmat");
         
@@ -44,7 +44,6 @@ public class NewsController {
     
     @GetMapping("/uutiset/suosituimmat")
     public String popular(Model model) {
-        model.addAttribute("categories", this.categories());
         model.addAttribute("articles", this.newsService.getLatest());
         model.addAttribute("title", "Suosituimmat");
         
@@ -61,7 +60,6 @@ public class NewsController {
         
         Category category = cat.get();
         
-        model.addAttribute("categories", this.categories());
         model.addAttribute("articles", category.getArticles());
         model.addAttribute("title", "Alue: " + category.getName());
         
