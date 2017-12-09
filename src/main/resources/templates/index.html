@@ -23,6 +23,12 @@
                         <p th:utext="${#strings.replace(#strings.escapeXml(article.lead), '&#10;', '</p><p>')}"></p>
                     </small>
                 </section>
+                <footer>
+                    <ul class="authors">
+                        <li th:each="author : ${article.authors}" th:text="${author.name}">
+                        </li>
+                    </ul>
+                </footer>
             </article>
         </div>
     </body>

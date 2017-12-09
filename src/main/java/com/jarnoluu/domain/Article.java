@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,11 +42,22 @@ public class Article extends AbstractPersistable<Long> {
     
     private int views;
     
+    @ManyToMany
+    List<Author> authors;
+    
     public List<Category> getCategories() {
         if (this.categories == null) {
             this.categories = new ArrayList<>();
         }
 
         return this.categories;
+    }
+    
+    public List<Author> getAuthors() {
+        if (this.authors == null) {
+            this.authors = new ArrayList<>();
+        }
+
+        return this.authors;
     }
 }

@@ -1,9 +1,11 @@
 package com.jarnoluu.service;
 
 import com.jarnoluu.domain.Article;
+import com.jarnoluu.domain.Author;
 import com.jarnoluu.domain.Category;
 import com.jarnoluu.domain.Picture;
 import com.jarnoluu.repository.ArticleRepository;
+import com.jarnoluu.repository.AuthorRepository;
 import com.jarnoluu.repository.CategoryRepository;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +33,10 @@ public class TestDataService {
     @Autowired
     private CategoryRepository categoryRepository;
     
-    private void create(String title, String lead, String content, String picture, int[] categories, LocalDateTime time, int views) throws IOException {
+    @Autowired
+    private AuthorRepository authorRepository;
+    
+    private void create(String title, String lead, String content, String picture, int[] categories, LocalDateTime time, int views, int[] authors) throws IOException {
         Path path = Paths.get("pics/" + picture);
         byte[] data = Files.readAllBytes(path);
         
@@ -46,6 +52,13 @@ public class TestDataService {
         article.setPublished(time);
         article.setViews(views);
         
+        List<Author> as = new ArrayList();
+        for(int a : authors) {
+            as.add(this.authorRepository.getOne((long)a));
+        }
+        
+        article.setAuthors(as);
+        
         this.articleRepository.save(article);
     }
     
@@ -53,6 +66,10 @@ public class TestDataService {
         this.categoryRepository.save(new Category("Kotimaa", null));
         this.categoryRepository.save(new Category("Ulkomaat", null));
         this.categoryRepository.save(new Category("Viihde", null));
+        
+        this.authorRepository.save(new Author("Kalle Appanen", null));
+        this.authorRepository.save(new Author("Lalli Leipäjuusto", null));
+        this.authorRepository.save(new Author("Skeletor", null));
         
         List<String> titles = Arrays.asList(
                 "Haluatko miljonääriksi? -kauden finaalissa melkoinen yllätys - Jaajo ylipuhuu kilpailijan jatkamaan, vaikka tämä on luovuttamassa",
@@ -79,6 +96,11 @@ public class TestDataService {
             new int[] {2}
         );
         
+        List<int[]> authors = Arrays.asList(
+            new int[] {4},
+            new int[] {4,5,6}
+        );
+        
         LocalDateTime time = LocalDateTime.now();
         
         Random rnd = new Random();
@@ -86,7 +108,7 @@ public class TestDataService {
         for(int i = 0; i < titles.size(); i++) {
             time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 2), ChronoUnit.SECONDS));
             
-            this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i), time, rnd.nextInt(1000));
+            this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i), time, rnd.nextInt(1000), authors.get(i));
         }
     }
 }

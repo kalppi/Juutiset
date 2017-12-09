@@ -1,12 +1,15 @@
 package com.jarnoluu.service;
 
 import com.jarnoluu.domain.Article;
+import com.jarnoluu.domain.Author;
 import com.jarnoluu.domain.Category;
 import com.jarnoluu.domain.Picture;
 import com.jarnoluu.repository.ArticleRepository;
 import com.jarnoluu.repository.PictureRepository;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -28,13 +31,19 @@ public class NewsService {
     @Autowired
     private PictureService pictureService;
     
+    @Autowired
+    private LoginService loginService;
+    
     public Article publishArticle(String title, String lead, String content, Picture picture, List<Category> categories) throws IOException {
         this.pictureRepository.save(picture);
         
         Picture small = this.pictureService.createSmaller(picture, 250);
         Picture thumb = this.pictureService.createSmaller(picture, 100);
         
-        Article article = new Article(title, lead, content, small, thumb, LocalDateTime.now(), categories, 0);
+        List<Author> authors = new ArrayList();
+        authors.add(this.loginService.getLoggedInAuthor());
+        
+        Article article = new Article(title, lead, content, small, thumb, LocalDateTime.now(), categories, 0, authors);
         
         return this.articleRepository.save(article);
     }
