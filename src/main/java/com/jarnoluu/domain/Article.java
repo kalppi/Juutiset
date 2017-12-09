@@ -45,6 +45,8 @@ public class Article extends AbstractPersistable<Long> {
     @OneToMany
     List<Category> categories;
     
+    private int views;
+    
     public List<Category> getCategories() {
         if (this.categories == null) {
             this.categories = new ArrayList<>();

@@ -30,7 +30,7 @@ public class TestDataService {
     @Autowired
     private CategoryRepository categoryRepository;
     
-    private void create(String title, String lead, String content, String picture, int[] categories, LocalDateTime time) throws IOException {
+    private void create(String title, String lead, String content, String picture, int[] categories, LocalDateTime time, int views) throws IOException {
         Path path = Paths.get("pics/" + picture);
         byte[] data = Files.readAllBytes(path);
         
@@ -44,6 +44,7 @@ public class TestDataService {
         Article article = newsService.publishArticle(title, lead, content, pic, cats);
         
         article.setPublished(time);
+        article.setViews(views);
         
         this.articleRepository.save(article);
     }
@@ -85,7 +86,7 @@ public class TestDataService {
         for(int i = 0; i < titles.size(); i++) {
             time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 2), ChronoUnit.SECONDS));
             
-            this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i), time);
+            this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i), time, rnd.nextInt(1000));
         }
     }
 }

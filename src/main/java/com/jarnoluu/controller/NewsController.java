@@ -44,7 +44,7 @@ public class NewsController {
     
     @GetMapping("/uutiset/suosituimmat")
     public String popular(Model model) {
-        model.addAttribute("articles", this.newsService.getLatest());
+        model.addAttribute("articles", this.newsService.getPopular());
         model.addAttribute("title", "Suosituimmat");
         
         return "list";

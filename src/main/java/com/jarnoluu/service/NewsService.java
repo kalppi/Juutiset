@@ -34,7 +34,7 @@ public class NewsService {
         Picture small = this.pictureService.createSmaller(picture, 250);
         Picture thumb = this.pictureService.createSmaller(picture, 100);
         
-        Article article = new Article(title, lead, content, picture, small, thumb, LocalDateTime.now(), categories);
+        Article article = new Article(title, lead, content, picture, small, thumb, LocalDateTime.now(), categories, 0);
         
         return this.articleRepository.save(article);
     }
@@ -43,5 +43,11 @@ public class NewsService {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "published");
         
         return this.articleRepository.findAll(pageable).getContent();
+    }
+    
+    public List<Article> getPopular() {
+        LocalDateTime time = LocalDateTime.now().minusWeeks(1);
+        
+        return this.articleRepository.findAllByPublishedAfterOrderByViewsDesc(time);
     }
 }

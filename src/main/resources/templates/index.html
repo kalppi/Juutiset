@@ -19,6 +19,7 @@
                 <section class="lead">
                     <img th:src="@{/picture/{id}(id=${article.thumb.id})}" />
                     <small>
+                        <p th:text="${article.views}"></p>
                         <p th:utext="${#strings.replace(#strings.escapeXml(article.lead), '&#10;', '</p><p>')}"></p>
                     </small>
                 </section>
