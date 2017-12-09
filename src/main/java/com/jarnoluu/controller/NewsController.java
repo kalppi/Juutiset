@@ -26,6 +26,7 @@ public class NewsController {
     public String index(Model model) {
         model.addAttribute("categories", this.categories());
         model.addAttribute("articles", this.newsService.getLatest());
+        model.addAttribute("title", "Etusivu");
         
         return "index";
     }
@@ -34,6 +35,16 @@ public class NewsController {
     public String latest(Model model) {
         model.addAttribute("categories", this.categories());
         model.addAttribute("articles", this.newsService.getLatest());
+        model.addAttribute("title", "Uusimmat");
+        
+        return "list";
+    }
+    
+    @GetMapping("/uutiset/suosituimmat")
+    public String popular(Model model) {
+        model.addAttribute("categories", this.categories());
+        model.addAttribute("articles", this.newsService.getLatest());
+        model.addAttribute("title", "Suosituimmat");
         
         return "list";
     }

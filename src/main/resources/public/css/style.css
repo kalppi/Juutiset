@@ -48,3 +48,11 @@ article .lead img {
     float: left;
     margin-right: 10px;
 }
+
+#list .published {
+    width: 150px;
+}
+
+th, td {
+    vertical-align: top;
+}
