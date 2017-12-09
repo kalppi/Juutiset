@@ -34,13 +34,13 @@ public class NewsService {
         Picture small = this.pictureService.createSmaller(picture, 250);
         Picture thumb = this.pictureService.createSmaller(picture, 100);
         
-        Article article = new Article(title, lead, content, picture, small, thumb, LocalDateTime.now(), categories, 0);
+        Article article = new Article(title, lead, content, small, thumb, LocalDateTime.now(), categories, 0);
         
         return this.articleRepository.save(article);
     }
     
-    public List<Article> getLatest() {
-        Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "published");
+    public List<Article> getLatest(int limit) {
+        Pageable pageable = PageRequest.of(0, limit, Sort.Direction.DESC, "published");
         
         return this.articleRepository.findAll(pageable).getContent();
     }

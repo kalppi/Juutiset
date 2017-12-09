@@ -28,7 +28,7 @@ public class NewsController {
     
     @GetMapping("/uutiset")
     public String index(Model model) {
-        model.addAttribute("articles", this.newsService.getLatest());
+        model.addAttribute("articles", this.newsService.getLatest(5));
         model.addAttribute("title", "Etusivu");
         
         return "index";
@@ -36,7 +36,7 @@ public class NewsController {
     
     @GetMapping("/uutiset/uusimmat")
     public String latest(Model model) {
-        model.addAttribute("articles", this.newsService.getLatest());
+        model.addAttribute("articles", this.newsService.getLatest(20));
         model.addAttribute("title", "Uusimmat");
         
         return "list";

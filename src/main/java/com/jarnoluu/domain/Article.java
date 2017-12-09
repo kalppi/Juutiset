@@ -33,10 +33,6 @@ public class Article extends AbstractPersistable<Long> {
     private Picture picture;
     
     @ManyToOne
-    @JoinColumn(name="picture_small_id")
-    private Picture small;
-    
-    @ManyToOne
     @JoinColumn(name="picture_thumb_id")
     private Picture thumb;
     
