@@ -3,13 +3,18 @@ package com.jarnoluu.service;
 import com.jarnoluu.domain.Article;
 import com.jarnoluu.domain.Category;
 import com.jarnoluu.domain.Picture;
+import com.jarnoluu.repository.ArticleRepository;
 import com.jarnoluu.repository.CategoryRepository;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +23,9 @@ import org.springframework.stereotype.Service;
 public class TestDataService {
     @Autowired
     private NewsService newsService;
+    
+    @Autowired
+    private ArticleRepository articleRepository;
     
     @Autowired
     private CategoryRepository categoryRepository;
@@ -33,7 +41,11 @@ public class TestDataService {
             cats.add(this.categoryRepository.getOne((long)cat));
         }
         
-        newsService.publishArticle(title, lead, content, pic, cats);
+        Article article = newsService.publishArticle(title, lead, content, pic, cats);
+        
+        article.setPublished(LocalDateTime.of(2017, 10, 1, 12, 0, 0));
+        
+        this.articleRepository.save(article);
     }
     
     public void createTestData() throws IOException {

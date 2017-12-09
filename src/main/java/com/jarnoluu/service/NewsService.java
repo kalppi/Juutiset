@@ -6,6 +6,7 @@ import com.jarnoluu.domain.Picture;
 import com.jarnoluu.repository.ArticleRepository;
 import com.jarnoluu.repository.PictureRepository;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -33,7 +34,7 @@ public class NewsService {
         Picture small = this.pictureService.createSmaller(picture, 250);
         Picture thumb = this.pictureService.createSmaller(picture, 100);
         
-        Article article = new Article(title, lead, content, picture, small, thumb, new Date(), categories);
+        Article article = new Article(title, lead, content, picture, small, thumb, LocalDateTime.now(), categories);
         
         return this.articleRepository.save(article);
     }

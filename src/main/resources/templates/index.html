@@ -8,7 +8,7 @@
                     <h3>
                         <a th:href="@{/uutinen/{id}(id=${article.id})}" th:text="${article.title}"></a>
                     </h3>
-                    <span class="published" th:text="${#dates.format(article.published, 'd.M. yyyy HH:mm')}"></span>
+                    <span class="published" th:text="${#temporals.format(article.published, 'd.M. yyyy HH:mm')}"></span>
                     <span>Alueet: </span>
                     <ul class="categories">
                         <li th:each="cat : ${article.categories}">

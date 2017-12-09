@@ -10,7 +10,7 @@
                     <th class="title">Otsikko</th>
                 </tr>
                 <tr th:each="article : ${articles}">
-                    <td  th:text="${#dates.format(article.published, 'd.M. yyyy HH:mm')}"></td>
+                    <td  th:text="${#temporals.format(article.published, 'd.M. yyyy HH:mm')}"></td>
                     <td th:text="${article.title}"></td>
                 </tr>
             </table>
