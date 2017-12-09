@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class NewsService {
     @Autowired
     private ArticleRepository articleRepository;
@@ -27,7 +28,6 @@ public class NewsService {
     @Autowired
     private PictureService pictureService;
     
-    @Transactional
     public Article publishArticle(String title, String lead, String content, Picture picture, List<Category> categories) throws IOException {
         this.pictureRepository.save(picture);
         
