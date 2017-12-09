@@ -51,7 +51,7 @@ public class TestDataService {
     
     public void createTestData() throws IOException {
         this.categoryRepository.save(new Category("Kotimaa", null));
-        this.categoryRepository.save(new Category("Ulkomaa", null));
+        this.categoryRepository.save(new Category("Ulkomaat", null));
         this.categoryRepository.save(new Category("Viihde", null));
         
         List<String> titles = Arrays.asList(
