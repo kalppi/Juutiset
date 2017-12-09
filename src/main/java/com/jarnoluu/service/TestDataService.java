@@ -83,7 +83,7 @@ public class TestDataService {
         Random rnd = new Random();
         
         for(int i = 0; i < titles.size(); i++) {
-            time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 3), ChronoUnit.SECONDS));
+            time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 2), ChronoUnit.SECONDS));
             
             this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i), time);
         }
