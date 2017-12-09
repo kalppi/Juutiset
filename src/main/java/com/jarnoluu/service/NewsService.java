@@ -1,6 +1,7 @@
 package com.jarnoluu.service;
 
 import com.jarnoluu.domain.Article;
+import com.jarnoluu.domain.Category;
 import com.jarnoluu.domain.Picture;
 import com.jarnoluu.repository.ArticleRepository;
 import com.jarnoluu.repository.PictureRepository;
@@ -26,13 +27,13 @@ public class NewsService {
     private PictureService pictureService;
     
     @Transactional
-    public Article publishArticle(String title, String lead, String content, Picture picture) throws IOException {
+    public Article publishArticle(String title, String lead, String content, Picture picture, List<Category> categories) throws IOException {
         this.pictureRepository.save(picture);
         
         Picture small = this.pictureService.createSmaller(picture, 250);
         Picture thumb = this.pictureService.createSmaller(picture, 100);
         
-        Article article = new Article(title, lead, content, picture, small, thumb, new Date());
+        Article article = new Article(title, lead, content, picture, small, thumb, new Date(), categories);
         
         return this.articleRepository.save(article);
     }

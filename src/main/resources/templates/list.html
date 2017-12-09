@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <div layout:fragment="content">
+            <h3>as</h3>
+            <table>
+                <tr th:each="article : ${articles}">
+                    <td th:text="${article.title}"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,11 +1,14 @@
 package com.jarnoluu.domain;
 
 import com.jarnoluu.service.PictureService;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -42,4 +45,15 @@ public class Article extends AbstractPersistable<Long> {
     
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date published;
+    
+    @OneToMany
+    List<Category> categories;
+    
+    public List<Category> getCategories() {
+        if (this.categories == null) {
+            this.categories = new ArrayList<>();
+        }
+
+        return this.categories;
+    }
 }

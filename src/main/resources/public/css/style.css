@@ -1,5 +1,18 @@
+.container {
+    margin-top: 20px;
+}
+
 article {
-    margin: 20px 0;
+    
+}
+
+#right ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#right ul li {
+    padding: 0 0 0 20px;
 }
 
 article img {
@@ -7,6 +20,28 @@ article img {
 }
 article .lead {
     
+}
+
+article ul.categories {
+    list-style-type: none;
+    padding: 0;
+    display: inline-block;
+}
+
+article ul.categories li {
+    display: inline;
+}
+
+article ul.categories li:after {
+    content: ",";
+}
+
+article ul.categories li:last-child:after {
+    content: "";
+}
+
+article .published {
+    margin-right: 10px;
 }
 
 article .lead img {
