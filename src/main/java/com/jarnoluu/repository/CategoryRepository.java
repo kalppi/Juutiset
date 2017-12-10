@@ -8,6 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    @Transactional
+    @Transactional(readOnly=true)
     public Optional<Category> findById(long id);
 }
