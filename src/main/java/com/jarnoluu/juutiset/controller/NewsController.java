@@ -44,7 +44,7 @@ public class NewsController {
     public String latest(Model model, @PathVariable Map<String, String> variables) {
         final int limit = 10;
         int page = 1;
-        int max = (int)Math.ceil(this.articleRepository.count() / limit) + 1;
+        int max = (int)Math.ceil(this.articleRepository.count() / (float)limit);
         
         if(variables.containsKey("page")) {
             page = Integer.parseInt(variables.get("page"));
