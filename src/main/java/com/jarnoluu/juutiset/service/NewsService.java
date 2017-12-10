@@ -32,6 +32,12 @@ public class NewsService {
     @Autowired
     private LoginService loginService;
     
+    public void increaseViews(Article article) {
+        article.setViews(article.getViews() + 1);
+        
+        this.articleRepository.save(article);
+    }
+    
     public Article editArticle(Article article, String title, String lead, String content) {
         article.setTitle(title);
         article.setLead(lead);

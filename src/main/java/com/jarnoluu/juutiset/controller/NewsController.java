@@ -73,14 +73,18 @@ public class NewsController {
     
     @GetMapping("/uutinen/{id}")
     public String view(Model model, @PathVariable long id) {
-        Optional<Article> article = this.articleRepository.findById(id);
+        Optional<Article> oArticle = this.articleRepository.findById(id);
         
-        if(!article.isPresent()) {
+        if(!oArticle.isPresent()) {
             return "forward:/error404";
         }
         
-        model.addAttribute("article", article.get());
-        model.addAttribute("title", "Uutinen: " + article.get().getTitle());
+        Article article = oArticle.get();
+        
+        this.newsService.increaseViews(article);
+        
+        model.addAttribute("article", article);
+        model.addAttribute("title", "Uutinen: " + article.getTitle());
         
         return "article";
     }
