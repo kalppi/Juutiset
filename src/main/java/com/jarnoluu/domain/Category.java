@@ -20,9 +20,4 @@ public class Category extends AbstractPersistable<Long> {
     
     @ManyToMany(mappedBy="categories", fetch=FetchType.LAZY)
     private List<Article> articles;
-    
-    @Transactional
-    public List<Article> getArticles() {
-        return this.articles;
-    }
 }
