@@ -9,7 +9,7 @@
                         <span class="published" th:text="${#temporals.format(article.published, 'd.M. yyyy HH:mm')}"></span>
                         <ul class="categories">
                             <li th:each="cat : ${article.categories}">
-                                <a th:href="@{/alue/{id}(id=${cat.id})}" th:text="${cat.name}"></a>
+                                <a th:href="@{/uutiset/alue/{id}(id=${cat.id})}" th:text="${cat.name}"></a>
                             </li>
                         </ul>
                     </div>
