@@ -1,6 +1,8 @@
 package com.jarnoluu.controller;
 
+import com.jarnoluu.domain.Article;
 import com.jarnoluu.domain.Category;
+import com.jarnoluu.repository.ArticleRepository;
 import com.jarnoluu.repository.CategoryRepository;
 import com.jarnoluu.service.NewsService;
 import java.util.List;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class NewsController {
     @Autowired
     private NewsService newsService;
+    
+    @Autowired
+    private ArticleRepository articleRepository;
     
     @Autowired
     private CategoryRepository categoryRepository;
@@ -64,5 +69,19 @@ public class NewsController {
         model.addAttribute("title", "Alue: " + category.getName());
         
         return "list";
+    }
+    
+    @GetMapping("/uutinen/{id}")
+    public String view(Model model, @PathVariable long id) {
+        Optional<Article> article = this.articleRepository.findById(id);
+        
+        if(!article.isPresent()) {
+            return "redirect:/error";
+        }
+        
+        model.addAttribute("article", article.get());
+        model.addAttribute("title", "Uutinen: " + article.get().getTitle());
+        
+        return "article";
     }
 }

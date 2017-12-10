@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <div layout:fragment="content">
+            <article>
+                <header>
+                    <div>
+                        <span class="published" th:text="${#temporals.format(article.published, 'd.M. yyyy HH:mm')}"></span>
+                        <ul class="categories">
+                            <li th:each="cat : ${article.categories}">
+                                <a th:href="@{/alue/{id}(id=${cat.id})}" th:text="${cat.name}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3>
+                        <a th:href="@{/uutinen/{id}(id=${article.id})}" th:text="${article.title}"></a>
+                    </h3>
+                </header>
+                <section class="lead">
+                    <img th:src="@{/picture/{id}(id=${article.thumb.id})}" />
+                    <small>
+                        <p th:utext="${#strings.replace(#strings.escapeXml(article.lead), '&#10;', '</p><p>')}"></p>
+                    </small>
+                </section>
+                <footer>
+                    <ul class="authors">
+                        <li th:each="author : ${article.authors}" th:text="${author.name}">
+                        </li>
+                    </ul>
+                </footer>
+            </article>
+        </div>
+    </body>
+</html>
+
