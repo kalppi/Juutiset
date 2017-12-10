@@ -11,13 +11,6 @@
                 <li><a th:href="@{/uutiset/uusimmat}">Uusimmat</a></li>
                 <li><a th:href="@{/uutiset/suosituimmat}">Viikon suosituimmat</a></li>
             </ul>
-            
-            <h5>Alueet</h5>
-            <ul id="categories">
-                <li th:each="cat: ${categories}">
-                    <a th:href="@{/uutiset/alue/{id}(id=${cat.id})}" th:text="${cat.name}"></a>
-                </li>
-            </ul>
         </div>
     </body>
 </html>

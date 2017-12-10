@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div th:fragment="top">
+            <ul id="categories">
+                <li th:each="cat: ${categories}">
+                    <a th:href="@{/uutiset/alue/{id}(id=${cat.id})}" th:text="${cat.name}"></a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

@@ -25,7 +25,7 @@ article h3 {
 }
 
 #right ul li {
-    padding: 0 0 0 20px;
+    padding: 0x;
 }
 
 article {
@@ -95,4 +95,20 @@ article .lead img {
 
 th, td {
     vertical-align: top;
+}
+
+#categories {
+    list-style-type: none;
+    padding: 0;
+}
+
+#categories li {
+    display: inline-block;
+    margin-right: 5px;
+    background: #0056b3;
+    padding: 5px 10px;
+}
+
+#categories li a {
+    color: white;
 }
