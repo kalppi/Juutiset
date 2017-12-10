@@ -29,14 +29,11 @@ article h3 {
 }
 
 article {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 article img {
     margin-bottom: 20px;
-}
-article .lead {
-    
 }
 
 article ul.categories {
@@ -80,9 +77,9 @@ article .authors li:last-child:after {
     content: "";
 }
 
-article .lead img {
+article .leading img {
     float: left;
-    margin-right: 10px;
+    margin: 0 10px 0 0;
 }
 
 #list .published {
@@ -111,4 +108,8 @@ th, td {
 
 #categories li a {
     color: white;
+}
+
+#article .leading {
+    font-weight: bold;
 }

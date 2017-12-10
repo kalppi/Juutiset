@@ -2,7 +2,7 @@
 <html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head></head>
     <body>
-        <div layout:fragment="content">
+        <div layout:fragment="content" id="article">
             <article>
                 <header>
                     <div>
@@ -17,11 +17,13 @@
                         <a th:href="@{/uutinen/{id}(id=${article.id})}" th:text="${article.title}"></a>
                     </h3>
                 </header>
-                <section class="lead">
-                    <img th:src="@{/picture/{id}(id=${article.thumb.id})}" />
-                    <small>
-                        <p th:utext="${#strings.replace(#strings.escapeXml(article.lead), '&#10;', '</p><p>')}"></p>
-                    </small>
+                <section class="leading">
+                    <img th:src="@{/picture/{id}(id=${article.picture.id})}" />
+                    
+                    <p th:utext="${#strings.replace(#strings.escapeXml(article.lead), '&#10;', '</p><p>')}"></p>
+                </section>
+                <section class="content">
+                    <p th:utext="${#strings.replace(#strings.escapeXml(article.content), '&#10;', '</p><p>')}"></p>
                 </section>
                 <footer>
                     <ul class="authors">
