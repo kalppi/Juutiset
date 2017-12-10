@@ -17,6 +17,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Author extends AbstractPersistable<Long> {
     String name;
     
-    @ManyToMany(mappedBy="authors", fetch=FetchType.LAZY)
+    @ManyToMany(mappedBy="authors", fetch=FetchType.EAGER)
     private List<Article> articles;
 }
