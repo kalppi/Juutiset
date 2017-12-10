@@ -1,7 +1,7 @@
-package com.jarnoluu.service;
+package com.jarnoluu.juutiset.service;
 
-import com.jarnoluu.domain.Author;
-import com.jarnoluu.repository.AuthorRepository;
+import com.jarnoluu.juutiset.domain.Author;
+import com.jarnoluu.juutiset.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

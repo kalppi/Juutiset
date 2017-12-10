@@ -1,6 +1,6 @@
-package com.jarnoluu;
+package com.jarnoluu.juutiset;
 
-import com.jarnoluu.JuutisetApplication;
+import com.jarnoluu.juutiset.JuutisetApplication;
 import org.junit.*;
 import static org.junit.Assert.assertTrue;
 

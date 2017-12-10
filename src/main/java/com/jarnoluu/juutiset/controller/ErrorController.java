@@ -1,4 +1,4 @@
-package com.jarnoluu.controller;
+package com.jarnoluu.juutiset.controller;
 
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.context.config.ResourceNotFoundException;

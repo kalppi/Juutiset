@@ -1,10 +1,10 @@
-package com.jarnoluu.controller;
+package com.jarnoluu.juutiset.controller;
 
-import com.jarnoluu.domain.Article;
-import com.jarnoluu.domain.Category;
-import com.jarnoluu.repository.ArticleRepository;
-import com.jarnoluu.repository.CategoryRepository;
-import com.jarnoluu.service.NewsService;
+import com.jarnoluu.juutiset.domain.Article;
+import com.jarnoluu.juutiset.domain.Category;
+import com.jarnoluu.juutiset.repository.ArticleRepository;
+import com.jarnoluu.juutiset.repository.CategoryRepository;
+import com.jarnoluu.juutiset.service.NewsService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

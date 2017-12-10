@@ -1,7 +1,7 @@
-package com.jarnoluu.controller;
+package com.jarnoluu.juutiset.controller;
 
-import com.jarnoluu.domain.Picture;
-import com.jarnoluu.repository.PictureRepository;
+import com.jarnoluu.juutiset.domain.Picture;
+import com.jarnoluu.juutiset.repository.PictureRepository;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package com.jarnoluu.service;
+package com.jarnoluu.juutiset.service;
 
-import com.jarnoluu.domain.Picture;
-import com.jarnoluu.repository.PictureRepository;
+import com.jarnoluu.juutiset.domain.Picture;
+import com.jarnoluu.juutiset.repository.PictureRepository;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

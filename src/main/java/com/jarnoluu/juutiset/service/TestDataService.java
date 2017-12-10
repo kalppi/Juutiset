@@ -1,12 +1,12 @@
-package com.jarnoluu.service;
+package com.jarnoluu.juutiset.service;
 
-import com.jarnoluu.domain.Article;
-import com.jarnoluu.domain.Author;
-import com.jarnoluu.domain.Category;
-import com.jarnoluu.domain.Picture;
-import com.jarnoluu.repository.ArticleRepository;
-import com.jarnoluu.repository.AuthorRepository;
-import com.jarnoluu.repository.CategoryRepository;
+import com.jarnoluu.juutiset.domain.Article;
+import com.jarnoluu.juutiset.domain.Author;
+import com.jarnoluu.juutiset.domain.Category;
+import com.jarnoluu.juutiset.domain.Picture;
+import com.jarnoluu.juutiset.repository.ArticleRepository;
+import com.jarnoluu.juutiset.repository.AuthorRepository;
+import com.jarnoluu.juutiset.repository.CategoryRepository;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

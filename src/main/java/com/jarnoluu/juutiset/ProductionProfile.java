@@ -1,4 +1,4 @@
-package com.jarnoluu;
+package com.jarnoluu.juutiset;
 
 import javax.activation.DataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;

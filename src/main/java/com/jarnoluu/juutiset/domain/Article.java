@@ -1,4 +1,4 @@
-package com.jarnoluu.domain;
+package com.jarnoluu.juutiset.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

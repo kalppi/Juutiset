@@ -1,4 +1,4 @@
-package com.jarnoluu.domain;
+package com.jarnoluu.juutiset.domain;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.jarnoluu;
+package com.jarnoluu.juutiset;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.jarnoluu.repository")
+@EnableJpaRepositories("com.jarnoluu.juutiset.repository")
 public class JuutisetApplication {
     @Bean
     public Java8TimeDialect java8TimeDialect() {

@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -Dprofile=prod -cp target/classes:target/dependency/* com.jarnoluu.JuutisetApplication
+web: java $JAVA_OPTS -Dserver.port=$PORT -Dprofile=prod -cp target/classes:target/dependency/* com.jarnoluu.juutiset.JuutisetApplication
