@@ -6,6 +6,7 @@ import com.jarnoluu.juutiset.repository.ArticleRepository;
 import com.jarnoluu.juutiset.repository.CategoryRepository;
 import com.jarnoluu.juutiset.service.NewsService;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -39,10 +40,27 @@ public class NewsController {
         return "index";
     }
     
-    @GetMapping("/uutiset/uusimmat")
-    public String latest(Model model) {
-        model.addAttribute("articles", this.newsService.getLatest(20));
+    @GetMapping({"/uutiset/uusimmat", "/uutiset/uusimmat/{page}"})
+    public String latest(Model model, @PathVariable Map<String, String> variables) {
+        final int limit = 10;
+        int page = 1;
+        int max = (int)Math.ceil(this.articleRepository.count() / limit) + 1;
+        
+        if(variables.containsKey("page")) {
+            page = Integer.parseInt(variables.get("page"));
+            
+            if(page < 1) {
+                return "redirect:/uutiset/uusimmat";
+            } else if(page > max) {
+                return "redirect:/uutiset/uusimmat/" + (max);
+            }
+        }
+        
+        model.addAttribute("articles", this.newsService.getLatestPage(page, limit));
         model.addAttribute("title", "Uusimmat");
+        model.addAttribute("page", page);
+        model.addAttribute("pages", max);
+        model.addAttribute("link", "uusimmat");
         
         return "list";
     }

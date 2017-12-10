@@ -141,3 +141,22 @@ th, td {
     margin-bottom: 10px;
     display: block;
 }
+
+#pages {
+    list-style-type: none;
+    padding: 0;
+}
+
+#pages li {
+    display: inline-block;
+    background: #007bff;
+    padding: 5px 10px;
+}
+
+#pages li.current {
+    background: #0056b3;
+}
+
+#pages li a {
+    color: white;
+}

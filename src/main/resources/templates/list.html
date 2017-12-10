@@ -4,6 +4,13 @@
     <body>
         <div layout:fragment="content">
             <h4 th:text="${title}"></h4>
+            
+            <ol id="pages" th:if="${page != null}">
+                <li th:each="p : ${#numbers.sequence(1, pages)}" th:class="${page == p} ? current : ''">
+                    <a th:href="@{/uutiset/{link}/{index}(link=${link},index=${p})}" th:text="${p}" />
+                </li>
+            </ol>
+            
             <table id="list">
                 <tr>
                     <th class="published">Julkaistu</th>

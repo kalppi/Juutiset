@@ -72,6 +72,12 @@ public class NewsService {
         return this.articleRepository.findAll(pageable).getContent();
     }
     
+    public List<Article> getLatestPage(int page, int limit) {
+        Pageable pageable = PageRequest.of(page - 1, limit, Sort.Direction.DESC, "published");
+        
+        return this.articleRepository.findAll(pageable).getContent();
+    }
+    
     public List<Article> getPopular() {
         LocalDateTime time = LocalDateTime.now().minusWeeks(1);
         
