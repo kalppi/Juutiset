@@ -63,13 +63,13 @@ public class TestDataService {
     }
     
     public void createTestData() throws IOException {
-        this.categoryRepository.save(new Category("Kotimaa", null));
-        this.categoryRepository.save(new Category("Ulkomaat", null));
-        this.categoryRepository.save(new Category("Viihde", null));
+        this.categoryRepository.save(new Category("Kotimaa"));
+        this.categoryRepository.save(new Category("Ulkomaat"));
+        this.categoryRepository.save(new Category("Viihde"));
         
-        this.authorRepository.save(new Author("Kalle Appanen", null));
-        this.authorRepository.save(new Author("Lalli Leipäjuusto", null));
-        this.authorRepository.save(new Author("Skeletor", null));
+        this.authorRepository.save(new Author("Kalle Appanen"));
+        this.authorRepository.save(new Author("Lalli Leipäjuusto"));
+        this.authorRepository.save(new Author("Skeletor"));
         
         List<String> titles = Arrays.asList(
                 "Haluatko miljonääriksi? -kauden finaalissa melkoinen yllätys - Jaajo ylipuhuu kilpailijan jatkamaan, vaikka tämä on luovuttamassa",

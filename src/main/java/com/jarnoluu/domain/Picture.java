@@ -3,21 +3,31 @@ package com.jarnoluu.domain;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Lob;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Data
 @Entity
 public class Picture extends AbstractPersistable<Long> {
+    @NonNull
     private String name;
-    private String mediaType;
-    private int size;
     
+    @NonNull
+    private String mediaType;
+    
+    @NonNull
+    private Integer size;
+    
+    @NonNull
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] content;
