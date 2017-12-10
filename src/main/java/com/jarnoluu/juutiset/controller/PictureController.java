@@ -5,6 +5,10 @@ import com.jarnoluu.juutiset.repository.PictureRepository;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,14 +20,17 @@ public class PictureController {
     private PictureRepository pictureRepository;
     
     @GetMapping(path="/picture/{id}")
-    @ResponseBody
-    public byte[] content(HttpServletResponse response, @PathVariable long id) {
-        Optional<Picture> pic = this.pictureRepository.findById(id);        
+    public ResponseEntity<byte[]> content(@PathVariable long id) {
+        Optional<Picture> oPic = this.pictureRepository.findById(id);        
         
-        if(pic.isPresent()) {
-            response.setContentType(pic.get().getMediaType());
+        if(oPic.isPresent()) {       
+            Picture pic = oPic.get();
             
-            return pic.get().getContent();
+            final HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(pic.getMediaType()));
+            headers.setContentLength(pic.getSize());
+
+            return new ResponseEntity<>(pic.getContent(), headers, HttpStatus.FOUND);
         } else {
             return null;
         }
