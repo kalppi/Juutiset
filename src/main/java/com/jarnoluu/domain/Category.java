@@ -4,7 +4,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
-import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Category extends AbstractPersistable<Long> {
     String name;
     
-    @ManyToMany(mappedBy="categories", fetch=FetchType.LAZY)
+    @ManyToMany(mappedBy="categories", fetch=FetchType.EAGER)
     private List<Article> articles;
 }
