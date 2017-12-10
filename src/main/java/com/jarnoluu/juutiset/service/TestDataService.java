@@ -36,7 +36,7 @@ public class TestDataService {
     @Autowired
     private AuthorRepository authorRepository;
     
-    private void create(String title, String lead, String content, String picture, int[] categories, LocalDateTime time, int views, int[] authors) throws IOException {
+    private void create(String title, String lead, String content, String picture, List<Integer> categories, LocalDateTime time, int views, List<Integer> authors) throws IOException {
         Path path = Paths.get("pics/" + picture);
         byte[] data = Files.readAllBytes(path);
         
@@ -63,6 +63,9 @@ public class TestDataService {
     }
     
     public void createTestData() throws IOException {
+        final int CAT_COUNT = 3;
+        final int AUT_COUNT = 3;
+        
         this.categoryRepository.save(new Category("Kotimaa"));
         this.categoryRepository.save(new Category("Ulkomaat"));
         this.categoryRepository.save(new Category("Viihde"));
@@ -72,13 +75,13 @@ public class TestDataService {
         this.authorRepository.save(new Author("skele", "Skeletor"));
         
         List<String> titles = Arrays.asList(
-                "Haluatko miljonääriksi? -kauden finaalissa melkoinen yllätys - Jaajo ylipuhuu kilpailijan jatkamaan, vaikka tämä on luovuttamassa",
-                "”Olkaa kilttejä, älkää ampuko minua” - 26-vuotias itkua pidätellyt mies kuoli poliisin luoteihin ryömiessään hotellihuoneen käytävällä USA:ssa: video näyttää kaiken"
+            "Haluatko miljonääriksi? -kauden finaalissa melkoinen yllätys - Jaajo ylipuhuu kilpailijan jatkamaan, vaikka tämä on luovuttamassa",
+            "”Olkaa kilttejä, älkää ampuko minua” - 26-vuotias itkua pidätellyt mies kuoli poliisin luoteihin ryömiessään hotellihuoneen käytävällä USA:ssa: video näyttää kaiken"
         );
                 
         List<String> leads = Arrays.asList(
-                "Lauantaina Haluatko miljonääriksi? -ohjelmassa päästään seuraamaan kauden viimeistä jaksoa, jossa Hanna Parhaniemi Kalajoelta jatkaa miljoonan tavoittelua.",
-                "Yksi ajattelematon kädenliike koitui henkensä puolesta anoneen kahden lapsen isän kohtaloksi Mesassa Arizonassa, yhdysvaltalaismedia kertoo."
+            "Lauantaina Haluatko miljonääriksi? -ohjelmassa päästään seuraamaan kauden viimeistä jaksoa, jossa Hanna Parhaniemi Kalajoelta jatkaa miljoonan tavoittelua.",
+            "Yksi ajattelematon kädenliike koitui henkensä puolesta anoneen kahden lapsen isän kohtaloksi Mesassa Arizonassa, yhdysvaltalaismedia kertoo."
         );
         
         List<String> contents = Arrays.asList(
@@ -87,28 +90,38 @@ public class TestDataService {
         );
         
         List<String> pictures = Arrays.asList(
-                "miljonaari_etu71217TK_tw.jpg",
-                "shaveretuJI091217_ul.jpg"
-        );
-        
-        List<int[]> cats = Arrays.asList(
-            new int[] {1, 3},
-            new int[] {2}
-        );
-        
-        List<int[]> authors = Arrays.asList(
-            new int[] {5},
-            new int[] {4,6}
+            "miljonaari_etu71217TK_tw.jpg",
+            "shaveretuJI091217_ul.jpg"
         );
         
         LocalDateTime time = LocalDateTime.now();
         
         Random rnd = new Random();
         
-        for(int i = 0; i < titles.size(); i++) {
-            time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 2), ChronoUnit.SECONDS));
-            
-            this.create(titles.get(i), leads.get(i), contents.get(i), pictures.get(i), cats.get(i), time, rnd.nextInt(1000), authors.get(i));
+        for(int j = 0; j < 5; j++) {
+            for(int i = 0; i < titles.size(); i++) {
+                time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 2), ChronoUnit.SECONDS));
+                
+                List<Integer> cats = new ArrayList();
+                for(int k = 0; k < rnd.nextInt(3) + 1; k++) {
+                    int cat = rnd.nextInt(CAT_COUNT) + 1;
+                    if(!cats.contains(cat)) cats.add(cat);
+                }
+                
+                List<Integer> authors = new ArrayList();
+                for(int k = 0; k < rnd.nextInt(3) + 1; k++) {
+                    int aut = CAT_COUNT + rnd.nextInt(AUT_COUNT) + 1;
+                    if(!authors.contains(aut)) authors.add(aut);
+                }
+                
+                String title = titles.get(rnd.nextInt(titles.size()));
+                String lead = leads.get(rnd.nextInt(leads.size()));
+                String picture = pictures.get(rnd.nextInt(pictures.size()));
+                String content = contents.get(rnd.nextInt(contents.size()));
+                int views = rnd.nextInt(1000);
+
+                this.create(title, lead, content, picture, cats, time, views, authors);
+            }
         }
     }
 }
