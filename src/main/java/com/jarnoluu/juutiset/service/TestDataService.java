@@ -98,30 +98,28 @@ public class TestDataService {
         
         Random rnd = new Random();
         
-        for(int j = 0; j < 5; j++) {
-            for(int i = 0; i < titles.size(); i++) {
-                time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 2), ChronoUnit.SECONDS));
-                
-                List<Integer> cats = new ArrayList();
-                for(int k = 0; k < rnd.nextInt(3) + 1; k++) {
-                    int cat = rnd.nextInt(CAT_COUNT) + 1;
-                    if(!cats.contains(cat)) cats.add(cat);
-                }
-                
-                List<Integer> authors = new ArrayList();
-                for(int k = 0; k < rnd.nextInt(3) + 1; k++) {
-                    int aut = CAT_COUNT + rnd.nextInt(AUT_COUNT) + 1;
-                    if(!authors.contains(aut)) authors.add(aut);
-                }
-                
-                String title = titles.get(rnd.nextInt(titles.size()));
-                String lead = leads.get(rnd.nextInt(leads.size()));
-                String picture = pictures.get(rnd.nextInt(pictures.size()));
-                String content = contents.get(rnd.nextInt(contents.size()));
-                int views = rnd.nextInt(1000);
+        for(int j = 0; j < 25; j++) {
+            time = time.minus(Duration.of(rnd.nextInt(60 * 60 * 24 * 2), ChronoUnit.SECONDS));
 
-                this.create(title, lead, content, picture, cats, time, views, authors);
+            List<Integer> cats = new ArrayList();
+            for(int k = 0; k < rnd.nextInt(3) + 1; k++) {
+                int cat = rnd.nextInt(CAT_COUNT) + 1;
+                if(!cats.contains(cat)) cats.add(cat);
             }
+
+            List<Integer> authors = new ArrayList();
+            for(int k = 0; k < rnd.nextInt(3) + 1; k++) {
+                int aut = CAT_COUNT + rnd.nextInt(AUT_COUNT) + 1;
+                if(!authors.contains(aut)) authors.add(aut);
+            }
+
+            String title = titles.get(rnd.nextInt(titles.size()));
+            String lead = leads.get(rnd.nextInt(leads.size()));
+            String picture = pictures.get(rnd.nextInt(pictures.size()));
+            String content = contents.get(rnd.nextInt(contents.size()));
+            int views = rnd.nextInt(1000);
+
+            this.create(title, lead, content, picture, cats, time, views, authors);
         }
     }
 }
