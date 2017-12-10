@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <div layout:fragment="content" id="create">
+            
+            <div th:if="${errors != null}" class="alert alert-danger">
+                <strong>Virhe</strong>
+                
+                <ul>
+                    <li th:each="error : ${errors}" th:text="${error}"></li>
+                </ul>
+            </div>
+            
+            <h4>Kirjoita uutinen</h4>
+            
+            <form method="post" th:action="@{/uutinen/kirjoita}" enctype="multipart/form-data">
+                <div>
+                    <label>Otsikko</label>
+                    <input id="title" type="text" name="title" th:value="${ctitle}"/>
+                </div>
+                <div>
+                    <label>Kuva</label>
+                    <div th:if="${ctpicture != null}">
+                        <img th:src="@{/picture/{id}(id=${ctpicture})}" />
+                    </div>
+                
+                    <input type="file" name="picture" accept="image/*">
+                        
+                    <input type="hidden" name="pictureId" th:value="${cpicture}" />
+                </div>
+                <div>
+                    <label>Ingressi</label>
+                    <textarea id="lead" name="lead" th:text="${#strings.replace(clead, '&#10;', '&#10;&#10;')}"></textarea>
+                </div>
+                <div>
+                <label>Teksti</label>
+                <textarea id="content" name="content" th:text="${#strings.replace(ccontent, '&#10;', '&#10;&#10;')}"></textarea>
+                </div>
+                <input type="submit" value="ok" />
+            </form>
+        </div>
+    </body>
+</html>
+

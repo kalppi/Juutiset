@@ -22,7 +22,7 @@ public class Picture extends AbstractPersistable<Long> {
     private String mediaType;
     
     @NonNull
-    private Integer size;
+    private Long size;
     
     @NonNull
     @Lob

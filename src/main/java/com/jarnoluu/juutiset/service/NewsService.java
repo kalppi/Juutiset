@@ -32,11 +32,25 @@ public class NewsService {
     @Autowired
     private LoginService loginService;
     
+    public Article editArticle(Article article, String title, String lead, String content) {
+        article.setTitle(title);
+        article.setLead(lead);
+        article.setContent(content);
+        
+        Author author = this.loginService.getLoggedInAuthor();
+        
+        if(!article.getAuthors().stream().anyMatch(a -> a.getName().equals(author.getName()))) {
+            article.getAuthors().add(author);
+        }
+        
+        return this.articleRepository.save(article);
+    }
+    
     public Article publishArticle(String title, String lead, String content, Picture picture, List<Category> categories) throws IOException {
         this.pictureRepository.save(picture);
         
-        Picture small = this.pictureService.createSmaller(picture, 250);
-        Picture thumb = this.pictureService.createSmaller(picture, 100);
+        Picture small = this.pictureService.createSmaller(picture);
+        Picture thumb = this.pictureService.createThumb(picture);
         
         List<Author> authors = new ArrayList();
         authors.add(this.loginService.getLoggedInAuthor());

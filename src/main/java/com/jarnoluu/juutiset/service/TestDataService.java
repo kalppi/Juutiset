@@ -40,7 +40,7 @@ public class TestDataService {
         Path path = Paths.get("pics/" + picture);
         byte[] data = Files.readAllBytes(path);
         
-        Picture pic = new Picture(picture, "image/jpeg", data.length, data);
+        Picture pic = new Picture(picture, "image/jpeg", (long)data.length, data);
         
         List<Category> cats = new ArrayList();
         for(int cat : categories) {
@@ -97,8 +97,8 @@ public class TestDataService {
         );
         
         List<int[]> authors = Arrays.asList(
-            new int[] {4},
-            new int[] {4,5,6}
+            new int[] {5},
+            new int[] {4,6}
         );
         
         LocalDateTime time = LocalDateTime.now();

@@ -1,5 +1,6 @@
 .container {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 h1 {
@@ -112,4 +113,31 @@ th, td {
 
 #article .leading {
     font-weight: bold;
+}
+
+#edit #title, #create #title {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#edit textarea#lead, #create textarea#lead {
+    width: 100%;
+    height: 100px;
+}
+
+#edit textarea#content, #create textarea#content {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 300px;
+}
+
+#edit label, #create label {
+    margin-top: 10px;
+}
+
+#create input[type=file] {
+    margin-bottom: 10px;
+    display: block;
 }

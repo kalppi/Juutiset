@@ -18,7 +18,15 @@ public class PictureService {
     @Autowired
     private PictureRepository pictureRepository;
     
-    public Picture createSmaller(Picture pic, int height) throws IOException {
+    public Picture createSmaller(Picture pic) throws IOException {
+        return this.resize(pic, 250);
+    }
+    
+    public Picture createThumb(Picture pic) throws IOException {
+        return this.resize(pic, 100);
+    }
+    
+    private Picture resize(Picture pic, int height) throws IOException {
         BufferedImage img = ImageIO.read(new ByteArrayInputStream(pic.getContent()));
         
         float p = height / (float)img.getHeight();
@@ -37,7 +45,7 @@ public class PictureService {
         byte[] bytes = baos.toByteArray();
         baos.close();
         
-        Picture picture = new Picture(pic.getName(), "image/jpeg", bytes.length, bytes);
+        Picture picture = new Picture(pic.getName(), "image/jpeg", (long)bytes.length, bytes);
         
         this.pictureRepository.save(picture);
         
