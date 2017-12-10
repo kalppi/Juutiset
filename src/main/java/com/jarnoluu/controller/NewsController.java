@@ -60,7 +60,7 @@ public class NewsController {
         Optional<Category> cat = this.categoryRepository.findById(id);
         
         if(!cat.isPresent()) {
-            return "redirect:/error";
+            return "forward:/error404";
         }
         
         Category category = cat.get();
@@ -76,7 +76,7 @@ public class NewsController {
         Optional<Article> article = this.articleRepository.findById(id);
         
         if(!article.isPresent()) {
-            return "redirect:/error";
+            return "forward:/error404";
         }
         
         model.addAttribute("article", article.get());

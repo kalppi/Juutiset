@@ -67,9 +67,9 @@ public class TestDataService {
         this.categoryRepository.save(new Category("Ulkomaat"));
         this.categoryRepository.save(new Category("Viihde"));
         
-        this.authorRepository.save(new Author("Kalle Appanen"));
-        this.authorRepository.save(new Author("Lalli Leipäjuusto"));
-        this.authorRepository.save(new Author("Skeletor"));
+        this.authorRepository.save(new Author("kaap", "Kalle Appanen"));
+        this.authorRepository.save(new Author("lale", "Lalli Leipäjuusto"));
+        this.authorRepository.save(new Author("skele", "Skeletor"));
         
         List<String> titles = Arrays.asList(
                 "Haluatko miljonääriksi? -kauden finaalissa melkoinen yllätys - Jaajo ylipuhuu kilpailijan jatkamaan, vaikka tämä on luovuttamassa",
