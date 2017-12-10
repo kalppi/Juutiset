@@ -1,5 +1,6 @@
 package com.jarnoluu.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,11 @@ public class ErrorController {
     }
     
     @GetMapping("/error404")
-    public String error404(Model model) {
+    public String error404(Model model, HttpServletResponse response) {
         model.addAttribute("message", "sivua ei löydy");
+        model.addAttribute("title", "Virhe: sivua ei löydy");
+        
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         
         return "error";
     }
