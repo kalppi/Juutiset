@@ -45,7 +45,7 @@ public class Article extends AbstractPersistable<Long> {
     private LocalDateTime published;
     
     @NonNull
-    @OneToMany
+    @ManyToMany
     List<Category> categories;
     
     @NonNull
