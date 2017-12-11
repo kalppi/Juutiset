@@ -12,10 +12,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class NewsServiceTest {
     @Autowired
     private NewsService newsService;
@@ -62,5 +64,15 @@ public class NewsServiceTest {
         for(LocalDateTime t : times) {
             Assert.assertTrue(t.isAfter(weekAgo));
         }
+    }
+    
+    @Test
+    public void testIncreaseViews() {
+        Article a = this.newsService.getLatest(1).get(0);
+        int views = a.getViews();
+        
+        this.newsService.increaseViews(a);
+        
+        Assert.assertEquals(views + 1, (int)a.getViews());
     }
 }
