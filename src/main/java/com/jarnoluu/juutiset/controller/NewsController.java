@@ -78,7 +78,7 @@ public class NewsController {
         Optional<Category> cat = this.categoryRepository.findById(id);
         
         if(!cat.isPresent()) {
-            return "forward:/error404";
+            return "forward:/404";
         }
         
         Category category = cat.get();
@@ -94,7 +94,7 @@ public class NewsController {
         Optional<Article> oArticle = this.articleRepository.findById(id);
         
         if(!oArticle.isPresent()) {
-            return "forward:/error404";
+            return "forward:/404";
         }
         
         Article article = oArticle.get();
