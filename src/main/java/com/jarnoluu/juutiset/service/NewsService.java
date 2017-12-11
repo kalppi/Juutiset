@@ -59,7 +59,9 @@ public class NewsService {
         Picture thumb = this.pictureService.createThumb(picture);
         
         List<Author> authors = new ArrayList();
-        authors.add(this.loginService.getLoggedInAuthor());
+        
+        Author author = this.loginService.getLoggedInAuthor();
+        if(author != null) authors.add(author);
         
         Article article = new Article(title, lead, content, small, thumb, LocalDateTime.now(), categories, 0, authors);
         

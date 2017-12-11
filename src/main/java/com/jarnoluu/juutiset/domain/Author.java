@@ -19,6 +19,9 @@ public class Author extends AbstractPersistable<Long> {
     String username;
     
     @NonNull
+    String password;
+    
+    @NonNull
     String name;
     
     @ManyToMany(mappedBy="authors", fetch=FetchType.LAZY)

@@ -4,6 +4,7 @@ import com.jarnoluu.juutiset.domain.Article;
 import com.jarnoluu.juutiset.domain.Category;
 import com.jarnoluu.juutiset.domain.Picture;
 import com.jarnoluu.juutiset.repository.ArticleRepository;
+import com.jarnoluu.juutiset.repository.CategoryRepository;
 import com.jarnoluu.juutiset.repository.PictureRepository;
 import com.jarnoluu.juutiset.service.LoginService;
 import com.jarnoluu.juutiset.service.NewsService;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,9 +42,22 @@ public class AdminController {
     @Autowired
     private PictureRepository pictureRepository;
     
+    @Autowired
+    private CategoryRepository categoryRepository;
+    
+    @ModelAttribute("categories")
+    private List<Category> categories() {
+        return this.categoryRepository.findAll(new Sort(Sort.Direction.ASC, "name"));
+    }
+    
     @GetMapping("/kirjaudu")
     public String login() {
         return "login";
+    }
+    
+    @PostMapping("/admin")
+    public String postAdmin() {
+        return "redirect:/admin";
     }
     
     @GetMapping("/admin")

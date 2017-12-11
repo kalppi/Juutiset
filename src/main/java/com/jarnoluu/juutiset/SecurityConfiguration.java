@@ -1,16 +1,20 @@
 package com.jarnoluu.juutiset;
 
 
+import com.jarnoluu.juutiset.service.JuutisetUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private UserDetailsService juutisetUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -21,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .formLogin()
                 .loginPage("/kirjaudu")
+                .successForwardUrl("/admin")
                 .permitAll()
                 .and()
             .logout()
@@ -28,8 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password("salasana").roles("USER");
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(this.juutisetUserDetailsService);
     }
 }
