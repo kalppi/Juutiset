@@ -62,6 +62,8 @@ public class TestDataService {
     }
     
     public void createTestData() throws IOException {
+        if(this.categoryRepository.count() > 0) return;
+        
         final int CAT_COUNT = 3;
         final int AUT_COUNT = 3;
         
