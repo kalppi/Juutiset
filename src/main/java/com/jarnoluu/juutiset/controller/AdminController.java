@@ -39,6 +39,11 @@ public class AdminController {
     @Autowired
     private PictureRepository pictureRepository;
     
+    @GetMapping("/kirjaudu")
+    public String login() {
+        return "login";
+    }
+    
     @GetMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("title", "admin");
