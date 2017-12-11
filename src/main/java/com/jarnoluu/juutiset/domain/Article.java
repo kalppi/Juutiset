@@ -1,13 +1,11 @@
 package com.jarnoluu.juutiset.domain;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -54,20 +52,4 @@ public class Article extends AbstractPersistable<Long> {
     @NonNull
     @ManyToMany
     List<Author> authors;
-    
-    public List<Category> getCategories() {
-        if (this.categories == null) {
-            this.categories = new ArrayList<>();
-        }
-
-        return this.categories;
-    }
-    
-    public List<Author> getAuthors() {
-        if (this.authors == null) {
-            this.authors = new ArrayList<>();
-        }
-
-        return this.authors;
-    }
 }
