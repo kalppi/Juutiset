@@ -1,9 +1,6 @@
 package com.jarnoluu.juutiset.controller;
 
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +17,6 @@ public class ErrorController {
     
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @GetMapping("/404")
-    @ExceptionHandler(NoHandlerFoundException.class)
     public String error404(Model model) {
         model.addAttribute("message", "sivua ei lö  ydy");
         model.addAttribute("title", "Virhe: sivua ei löydy");
