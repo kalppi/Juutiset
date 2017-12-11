@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class NewsController {
+    private final int ARTICLES_ON_PAGE = 10;
+    
     @Autowired
     private NewsService newsService;
     
@@ -42,9 +44,8 @@ public class NewsController {
     
     @GetMapping({"/uutiset/uusimmat", "/uutiset/uusimmat/{page}"})
     public String latest(Model model, @PathVariable Map<String, String> variables) {
-        final int limit = 10;
         int page = 1;
-        int max = (int)Math.ceil(this.articleRepository.count() / (float)limit);
+        int max = (int)Math.ceil(this.articleRepository.count() / (float)this.ARTICLES_ON_PAGE);
         
         if(variables.containsKey("page")) {
             page = Integer.parseInt(variables.get("page"));
@@ -56,7 +57,7 @@ public class NewsController {
             }
         }
         
-        model.addAttribute("articles", this.newsService.getLatestPage(page, limit));
+        model.addAttribute("articles", this.newsService.getLatestPage(page, this.ARTICLES_ON_PAGE));
         model.addAttribute("title", "Uusimmat");
         model.addAttribute("page", page);
         model.addAttribute("pages", max);
